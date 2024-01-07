@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
+import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 interface BannerProps {
   documentId: Id<"documents">;
@@ -55,6 +56,7 @@ export const Banner = ({
       >
         Restore page
       </Button>
+      <ConfirmModal onConfirm={onRemove}>
         <Button
           size="sm"
           variant="outline"
@@ -62,6 +64,7 @@ export const Banner = ({
         >
           Delete forever
         </Button>
+      </ConfirmModal>
     </div>
   )
 }
