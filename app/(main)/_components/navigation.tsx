@@ -27,7 +27,8 @@ import { useSettings } from "@/hooks/use-settings";
 
 import { UserItem } from "./user-item";
 import { Item } from "./item";
-import { DocumentList } from "./document-list";
+import { DocumentListPublic } from "./document-list-public";
+import { DocumentListPrivate } from "./document-list-private";
 import { TrashBox } from "./trash-box";
 import { Navbar } from "./navbar";
 
@@ -172,12 +173,19 @@ export const Navigation = () => {
           />
         </div>
         <div className="mt-4">
-          <DocumentList />
+        <h1 className="ml-3 mb-1 text-sm text-indigo-600 underline underline-offset-2 font-switzerMedium">
+            Public Documents
+          </h1>
+          <DocumentListPublic />
           <Item
             onClick={handleCreate}
             icon={Plus}
             label="Add a page"
           />
+          <h1 className="ml-3 text-sm text-indigo-600 mt-3 mb-1 underline underline-offset-2 font-switzerMedium">
+            Private Documents
+          </h1>
+          <DocumentListPrivate />
           <Popover>
             <PopoverTrigger className="w-full mt-4">
               <Item label="Trash" icon={Trash} />

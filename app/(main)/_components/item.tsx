@@ -36,6 +36,9 @@ interface ItemProps {
   label: string;
   onClick?: () => void;
   icon: LucideIcon;
+  creatorId?: string;
+  creatorName?: string;
+  isEditable?: boolean;
 };
 
 export const Item = ({
@@ -49,6 +52,8 @@ export const Item = ({
   level = 0,
   onExpand,
   expanded,
+  creatorId,
+  creatorName,
 }: ItemProps) => {
   const { user } = useUser();
   const router = useRouter();
@@ -165,7 +170,7 @@ export const Item = ({
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <div className="text-xs text-muted-foreground p-2">
-                Last edited by: {user?.fullName}
+                Last edited by: {creatorName}
               </div>
             </DropdownMenuContent>
           </DropdownMenu>

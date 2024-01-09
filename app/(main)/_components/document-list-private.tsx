@@ -11,36 +11,36 @@ import { cn } from "@/lib/utils";
 
 import { Item } from "./item";
 
-interface DocumentListProps {
+interface DocumentListPrivateProps {
   parentDocumentId?: Id<"documents">;
   level?: number;
   data?: Doc<"documents">[];
 }
 
-export const DocumentList = ({
+export const DocumentListPrivate = ({
   parentDocumentId,
-  level = 0
-}: DocumentListProps) => {
+  level = 0,
+}: DocumentListPrivateProps) => {
   const params = useParams();
   const router = useRouter();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   const onExpand = (documentId: string) => {
-    setExpanded(prevExpanded => ({
+    setExpanded((prevExpanded) => ({
       ...prevExpanded,
-      [documentId]: !prevExpanded[documentId]
+      [documentId]: !prevExpanded[documentId],
     }));
   };
 
-  const documents = useQuery(api.documents.getSidebar, {
-    parentDocument: parentDocumentId
+  const documentsPrivate = useQuery(api.documents.getSidebarPrivate, {
+    parentDocument: parentDocumentId,
   });
-
+  // console.log(documentsPrivate, "DOCUMENTS PUBLIC");
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
 
-  if (documents === undefined) {
+  if (documentsPrivate === undefined) {
     return (
       <>
         <Item.Skeleton level={level} />
@@ -52,13 +52,13 @@ export const DocumentList = ({
         )}
       </>
     );
-  };
+  }
 
   return (
     <>
       <p
         style={{
-          paddingLeft: level ? `${(level * 12) + 25}px` : undefined
+          paddingLeft: level ? `${level * 12 + 25}px` : undefined,
         }}
         className={cn(
           "hidden text-sm font-medium text-muted-foreground/80",
@@ -68,7 +68,7 @@ export const DocumentList = ({
       >
         No pages inside
       </p>
-      {documents.map((document) => (
+      {documentsPrivate.map((document) => (
         <div key={document._id}>
           <Item
             id={document._id}
@@ -80,12 +80,11 @@ export const DocumentList = ({
             level={level}
             onExpand={() => onExpand(document._id)}
             expanded={expanded[document._id]}
+            creatorId={document.userId}
+            creatorName={document.userName}
           />
           {expanded[document._id] && (
-            <DocumentList
-              parentDocumentId={document._id}
-              level={level + 1}
-            />
+            <DocumentListPrivate parentDocumentId={document._id} level={level + 1} />
           )}
         </div>
       ))}
