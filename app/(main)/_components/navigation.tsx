@@ -2,6 +2,7 @@
 
 import {
   ChevronsLeft,
+  LogOutIcon,
   MenuIcon,
   Plus,
   PlusCircle,
@@ -31,6 +32,8 @@ import { DocumentListPublic } from "./document-list-public";
 import { DocumentListPrivate } from "./document-list-private";
 import { TrashBox } from "./trash-box";
 import { Navbar } from "./navbar";
+import { SignOutButton } from "@clerk/clerk-react";
+import UserInfoCard from "./user-info-card";
 
 export const Navigation = () => {
   const router = useRouter();
@@ -155,6 +158,7 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
+          <UserInfoCard />
           <Item
             label="Search"
             icon={Search}
@@ -173,7 +177,7 @@ export const Navigation = () => {
           />
         </div>
         <div className="mt-4">
-        <h1 className="ml-3 mb-1 text-sm text-indigo-600 underline underline-offset-2 font-switzerMedium">
+        <h1 className="ml-3 mb-1 text-muted-foreground underline underline-offset-2 font-switzerMedium">
             Public Documents
           </h1>
           <DocumentListPublic />
@@ -182,7 +186,7 @@ export const Navigation = () => {
             icon={Plus}
             label="Add a page"
           />
-          <h1 className="ml-3 text-sm text-indigo-600 mt-3 mb-1 underline underline-offset-2 font-switzerMedium">
+          <h1 className="ml-3 text-muted-foreground mt-3 mb-1 underline underline-offset-2 font-switzerMedium">
             Private Documents
           </h1>
           <DocumentListPrivate />
@@ -203,6 +207,14 @@ export const Navigation = () => {
           onClick={resetWidth}
           className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
         />
+        <div className="ml-3 mt-3 hover:cursor-pointer flex w-[200px]">
+          <SignOutButton>
+            <div className="text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 flex flex-row">
+              <LogOutIcon className="w-5 h-5" />
+              <h1 className="ml-2 text-sm">Log Out</h1>
+            </div>
+          </SignOutButton>
+        </div>
       </aside>
       <div
         ref={navbarRef}
