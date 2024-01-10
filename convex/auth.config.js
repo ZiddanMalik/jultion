@@ -1,7 +1,7 @@
 export default {
   providers: [
     {
-      domain: "https://clerk.jultion.site",
+      domain: "pet-tetra-83.clerk.accounts.dev",
       applicationID: "convex",
     },
   ],
