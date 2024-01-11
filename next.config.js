@@ -2,7 +2,9 @@
 const nextConfig = {
     images: {
         domains: [
-            "files.edgestore.dev"
+            "files.edgestore.dev",
+            "convex.cloud",
+            "helpful-clam-121.convex.cloud",
         ]
     }
 }
